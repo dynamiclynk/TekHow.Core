@@ -8,7 +8,6 @@ namespace TekHow.Core.Enums
 {
     public enum AppSettingsSectionEnum
     {
-        ConnectionStrings,
-        RabbitMqSettings
+        ConnectionStrings
     }
 }

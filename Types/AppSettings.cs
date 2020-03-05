@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TekHow.Core.Constants;
 
 namespace TekHow.Core.Types
 {
@@ -17,7 +18,6 @@ namespace TekHow.Core.Types
     public class AppSettings
     {
         private IConfigurationRoot _configRoot = null;
-        const string customSettings = "CUSTOMSETTINGS";
         private ConfigurationBuilder _builder = null;
         /// <summary>
         /// Custom library to provide access to appsettings.json in any .Net project type.
@@ -76,7 +76,7 @@ namespace TekHow.Core.Types
 
             if (_configRoot == null) return default;
 
-            var rootSection = _configRoot.GetSection(customSettings);
+            var rootSection = _configRoot.GetSection(StringConstants.CUSTOM_SETTINGS);
 
             var value = rootSection?.GetSection($"{sectionUpper}:{key?.ToUpperInvariant()}:VALUE")?.Value;
 
@@ -94,7 +94,7 @@ namespace TekHow.Core.Types
 
             if (_configRoot == null) return default;
 
-            var rootSection = _configRoot.GetSection(customSettings);
+            var rootSection = _configRoot.GetSection(StringConstants.CUSTOM_SETTINGS);
             
             var value = rootSection?.GetSection($"{sectionUpper}:{key?.ToUpperInvariant()}:VALUE")?.Value;
             if (!string.IsNullOrEmpty(value))

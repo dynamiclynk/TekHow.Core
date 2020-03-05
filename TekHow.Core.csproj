@@ -8,7 +8,7 @@
     <Deterministic>False</Deterministic>
     <Platforms>AnyCPU;x64</Platforms>
     <OutputPath>bin\$(Configuration)\$(TargetFramework)\$(Platform)\</OutputPath>
-    <TargetFrameworks>net471;net472;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,7 +19,6 @@
     <Authors>DynamicLynk@TekHow.net</Authors>
     <Company>TekHow</Company>
     <Description>TekHow core shared library </Description>
-    <!--<PackageProjectUrl>http://entnugetavm.ssird.corp:81/feeds/Default/TekHow.Core.Core</PackageProjectUrl>-->
     <PackageTags>TekHow, Shared</PackageTags>
     <PackageLicenseExpression>GNU</PackageLicenseExpression>
   </PropertyGroup>

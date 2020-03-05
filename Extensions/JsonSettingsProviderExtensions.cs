@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TekHow.Core.Constants;
 
 namespace TekHow.Core.Extensions
 {
@@ -44,7 +45,7 @@ namespace TekHow.Core.Extensions
         public static T GetCustomSettingValue<T>(this IConfigurationRoot root, string section, string key)
         {
             section = section.ToUpperInvariant();
-            var keyPattern = $"JOBSCUSTOMSETTINGS:{section}:{key?.ToUpperInvariant()}:VALUE";
+            var keyPattern = $"{StringConstants.CUSTOM_SETTINGS}:{section}:{key?.ToUpperInvariant()}:VALUE";
             var value = root.GetSection(keyPattern)?.Value;
             var typedValue = ConvertAny.Convert<T>(value);
 
@@ -54,7 +55,7 @@ namespace TekHow.Core.Extensions
         public static T GetSettingValue<T>(this IConfigurationRoot root, AppSettingsSectionEnum appSettingsSection, string key)
         {
             var section = appSettingsSection.ToJsonString().ToUpperInvariant();
-            var keyPattern = $"JOBSCUSTOMSETTINGS:{section}:{key?.ToUpperInvariant()}:VALUE";
+            var keyPattern = $"{StringConstants.CUSTOM_SETTINGS}:{section}:{key?.ToUpperInvariant()}:VALUE";
             var value = root.GetSection(keyPattern)?.Value;
             var typedValue = ConvertAny.Convert<T>(value);
 
