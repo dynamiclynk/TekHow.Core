@@ -20,9 +20,15 @@
     <Company>TekHow</Company>
     <Description>TekHow core shared library </Description>
     <PackageTags>TekHow, Shared</PackageTags>
-    <PackageLicenseExpression>GNU</PackageLicenseExpression>
-  </PropertyGroup>
+      </PropertyGroup>
 
+  <PropertyGroup>
+  <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+</PropertyGroup>
+<ItemGroup>
+  <None Include="licenses\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+</ItemGroup>
+    
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="licenses\" />
     <Folder Include="Parsing\" />
   </ItemGroup>
 
