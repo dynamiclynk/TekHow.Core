@@ -3,31 +3,45 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+name: $(majorMinorVersion).$(semanticVersion) # $(rev:r) # NOTE: rev resets when the default retention period expires
 
+pool: 
+  vmImage: 'ubuntu-latest'
+
+# pipeline variables
+variables:
+  majorMinorVersion: 1.0
+  # semanticVersion counter is automatically incremented by one in each execution of pipeline
+  # second parameter is seed value to reset to every time the referenced majorMinorVersion is changed
+  semanticVersion: $[counter(variables['majorMinorVersion'], 0)]
+  projectName: 'TekHow.Core'
+  buildConfiguration: 'Release'
+
+# Only run against master
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  buildConfiguration: 'Release'
-
 steps:
+ # Build
 - task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
-    command: 'build'
     projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+# Package
 - task: DotNetCoreCLI@2
+  displayName: 'NuGet pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
-    includesymbols: true
-    versioningScheme: 'byBuildNumber'
+    configuration: $(BuildConfiguration)
+    packagesToPack: '**/$(ProjectName)*.csproj'
+    packDirectory: '$(build.artifactStagingDirectory)'
+    versioningScheme: byBuildNumber # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
+# Publish
 - task: DotNetCoreCLI@2
+  displayName: 'Push artifact'
   inputs:
-   command: 'push'
-   packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-   nuGetFeedType: 'internal'
-   publishVstsFeed: '23f4464a-0072-4a37-9f45-1172e8b5bc94/70d78358-5aba-41a5-b764-ca7420f93f75'
+    command: 'push'
+    nuGetFeedType: 'internal'
+    packagesToPush: '$(build.artifactStagingDirectory)/$(ProjectName)*.nupkg'
+    publishVstsFeed: '23f4464a-0072-4a37-9f45-1172e8b5bc94/70d78358-5aba-41a5-b764-ca7420f93f75'
