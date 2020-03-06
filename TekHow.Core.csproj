@@ -9,6 +9,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <OutputPath>bin\$(Configuration)\$(TargetFramework)\$(Platform)\</OutputPath>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <VersionPrefix>1.0.0</VersionPrefix>
   </PropertyGroup>
 
   <PropertyGroup>
