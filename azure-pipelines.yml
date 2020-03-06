@@ -13,5 +13,19 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    includesymbols: true
+    versioningScheme: 'byBuildNumber'
+- task: DotNetCoreCLI@2
+  inputs:
+   command: 'push'
+   packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+   nuGetFeedType: 'internal'
+   publishVstsFeed: '23f4464a-0072-4a37-9f45-1172e8b5bc94/70d78358-5aba-41a5-b764-ca7420f93f75'
