@@ -38,4 +38,4 @@ steps:
     packDirectory: '$(build.artifactStagingDirectory)'
     versioningScheme: byBuildNumber # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/dotnet-core-cli?view=azure-devops#yaml-snippet
 # Publish
-- script: dotnet nuget push TekHow.Core.$(Build.BuildNumber).nupkg -k oy2n4kikyb2jlqf3fgbq4bnuluqzuxwezhblgikgykxdzq -s https://api.nuget.org/v3/index.json
+- script: dotnet nuget push $(Build.ArtifactStagingDirectory)\TekHow.Core.$(Build.BuildNumber).nupkg -k oy2n4kikyb2jlqf3fgbq4bnuluqzuxwezhblgikgykxdzq -s https://api.nuget.org/v3/index.json
