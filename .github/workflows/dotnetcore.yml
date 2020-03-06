@@ -19,3 +19,24 @@ jobs:
         dotnet-version: 3.1.101
     - name: Build with dotnet
       run: dotnet build --configuration Release
+    - name: Pack with dotnet
+      run: dotnet pack
+    - name: Publish with dotnet
+      run: dotnet nuget push $(Build.ArtifactStagingDirectory)/TekHow.Core.$(Build.BuildNumber).nupkg -k oy2n4kikyb2jlqf3fgbq4bnuluqzuxwezhblgikgykxdzq -s https://api.nuget.org/v3/index.json
+    - name: Publish NuGet
+      uses: rohith/publish-nuget@v2.1.2
+      with:
+        # Filepath of the project to be packaged, relative to root of repository
+        PROJECT_FILE_PATH: /
+        # Filepath containing version info, relative to root of repository. Defaults to `PROJECT_FILE_PATH` if not specified
+        #VERSION_FILE_PATH: # optional
+        # Regex (with version in a capturing group) to extract the version from `VERSION_FILE_PATH`
+        #VERSION_REGEX: # optional, default is <Version>(.*)<\/Version>
+        # Whether to create a tag when there's a version change
+        #TAG_COMMIT: # optional, default is true
+        # Format of the tag, `*` is the placeholder for actual version
+        #TAG_FORMAT: # optional, default is v*
+        # API key for the NuGet feed
+        NUGET_KEY: oy2n4kikyb2jlqf3fgbq4bnuluqzuxwezhblgikgykxdzq
+        # NuGet package name, required when it's different from the project name
+        PACKAGE_NAME: TekHow.Core
