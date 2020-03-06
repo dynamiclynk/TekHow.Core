@@ -9,6 +9,8 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+
 variables:
   buildConfiguration: 'Release'
 
