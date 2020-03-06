@@ -21,8 +21,6 @@ jobs:
       run: dotnet build --configuration Release
     - name: Pack with dotnet
       run: dotnet pack
-    - name: Publish with dotnet
-      run: dotnet nuget push $(Build.ArtifactStagingDirectory)/TekHow.Core.$(Build.BuildNumber).nupkg -k oy2n4kikyb2jlqf3fgbq4bnuluqzuxwezhblgikgykxdzq -s https://api.nuget.org/v3/index.json
     - name: Publish NuGet
       uses: rohith/publish-nuget@v2.1.2
       with:
