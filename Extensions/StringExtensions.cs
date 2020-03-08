@@ -12,6 +12,21 @@ namespace TekHow.Core.Extensions
 {
     public static class StringExtensions
     {
+        public static bool IsValidRegex(this string pattern)
+        {
+            if (string.IsNullOrEmpty(pattern)) return false;
+
+            try
+            {
+                Regex.Match("", pattern);
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
+            return true;
+        }
         public static string ToMd5String(this string inString)
         {
            try
