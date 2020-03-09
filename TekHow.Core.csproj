@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -22,7 +21,7 @@
     <Description>TekHow core shared library </Description>
     <PackageTags>TekHow, Shared</PackageTags>
   </PropertyGroup>
-
+   
   <PropertyGroup>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
